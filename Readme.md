@@ -1,5 +1,7 @@
 # TokuMX v. 1.0 is Open Source and available for download
 
+    http://www.tokutek.com/2013/06/announcing-tokumx-v1-0-tokumongo-you-can-have-it-all-2/
+
 
 
 # Requirements:
