@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "precise64"
-  config.vm.network :private_network, ip: "192.168.33.2"
+  #config.vm.network :private_network, ip: "192.168.33.4"
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet/manifests"
