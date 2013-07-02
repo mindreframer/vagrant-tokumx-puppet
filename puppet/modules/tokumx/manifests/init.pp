@@ -60,16 +60,16 @@ class tokumx::configs{
   #   mode    => 0755,
   # }
 
-  # file{"/etc/mysql":
-  #   ensure => directory
-  # }
+  file{"/data":
+    ensure => directory
+  }
   # -> file{"/etc/mysql/my.cnf":
   #   content => template("tokumx/my.cnf.erb"),
   # }
-  # -> file{$tokumx::params::data_dir:
-  #   ensure => directory,
-  #   owner => 'mysql', group => 'mysql'
-  # }
+  -> file{$tokumx::params::data_dir:
+    ensure => directory,
+    owner => 'mongodb', group => 'mongodb'
+  }
 }
 
 class tokumx::initialize{
