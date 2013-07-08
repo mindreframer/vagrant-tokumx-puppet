@@ -55,18 +55,17 @@ class tokumx::packages{
 }
 
 class tokumx::configs{
-  # file{"/etc/init.d/mysql":
-  #   content => template("tokumx/mysql.server.erb"),
-  #   mode    => 0755,
-  # }
-
-  file{"/data":
-    ensure => directory
+  file{"/etc/init/mongodb.conf":
+    content => template("tokumx/upstart.conf.erb"),
+    mode    => 0755,
   }
-  # -> file{"/etc/mysql/my.cnf":
-  #   content => template("tokumx/my.cnf.erb"),
-  # }
-  -> file{$tokumx::params::data_dir:
+
+  file{"/etc/mongodb.conf":
+    content => template("tokumx/mongodb.conf.erb"),
+    mode    => 0644,
+  }
+
+  file{["/var/log/mongodb/", $tokumx::params::data_dir]:
     ensure => directory,
     owner => 'mongodb', group => 'mongodb'
   }
@@ -81,8 +80,9 @@ class tokumx::initialize{
 }
 
 class tokumx::service{
-  # service{"mysql":
-  #   ensure    => running,
-  #   subscribe => Class["tokudb::configs"]
-  # }
+  service{"mongodb":
+    provider  => upstart,
+    ensure    => running,
+    subscribe => Class["tokumx::configs"]
+  }
 }
