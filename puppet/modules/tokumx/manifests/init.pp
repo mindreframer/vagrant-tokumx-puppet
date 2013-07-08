@@ -4,7 +4,6 @@ class tokumx{
     -> class{"tokumx::download":}
     -> class{"tokumx::packages":}
     -> class{"tokumx::configs":}
-    -> class{"tokumx::initialize":}
     -> class{"tokumx::service":}
 }
 
@@ -13,7 +12,7 @@ class tokumx::users{
     ensure => 'present',
     uid    => $tokumx::params::user_id,
   }
-  -> group { "mongnodb":
+  -> group { "mongodb":
     ensure  => "present",
     gid     => $tokumx::params::user_id,
   }
@@ -48,6 +47,13 @@ class tokumx::download{
     command => "chown -R mongodb:mongodb /usr/local/$fullpath",
     unless  => "stat /usr/local/$fullpath|grep Access|grep mongodb"
   }
+
+  -> exec{"binary:symlinks":
+    # list | split | use 'file' as variable and create symlinks
+    command => "ls  /usr/local/tokumx/bin |xargs -0 |xargs -I file ln -s /usr/local/tokumx/bin/file /usr/local/bin/file",
+    # unless symlink exists and points to right target
+    unless => "test -e /usr/local/bin/mongo && readlink /usr/local/bin/mongo|grep /usr/local/tokumx/bin/mongo"
+  }
 }
 
 class tokumx::packages{
@@ -69,14 +75,6 @@ class tokumx::configs{
     ensure => directory,
     owner => 'mongodb', group => 'mongodb'
   }
-}
-
-class tokumx::initialize{
-  # $check_file = "$tokumx::params::base_dir/.installed"
-  # exec{"init mysql":
-  #   command => "echo 1 && cd $tokumx::params::base_dir && ./scripts/mysql_install_db --user=mysql && touch $check_file",
-  #   unless  => "test -e $check_file"
-  # }
 }
 
 class tokumx::service{
