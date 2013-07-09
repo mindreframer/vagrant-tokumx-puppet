@@ -1,5 +1,6 @@
 class golang{
   class{"golang::params":}
+  -> class{"golang::packages":}
   -> class{"golang::download":}
   -> class{"golang::environment":}
 }
@@ -16,10 +17,24 @@ class golang::download{
   }
 }
 
+class golang::packages{
+  package{$golang::params::packagenames: ensure => installed}
+}
+
+## /etc/bash.bashrc
 class golang::environment{
-  # /etc/bash.bashrc
   exec{"golang:binpath":
     command => "echo 'export PATH=\$PATH:/usr/local/go/bin' >> /etc/bash.bashrc",
     unless  => "cat /etc/bash.bashrc|grep 'local/go/bin'"
+  }
+
+  -> exec{"golang:gopath":
+    command => "echo 'export GOPATH=/usr/local/gopath' >> /etc/bash.bashrc",
+    unless  => "cat /etc/bash.bashrc|grep 'usr/local/gopath'"
+  }
+  -> file{"/usr/local/gopath":
+    ensure => directory,
+    owner => root, group => admin,
+    mode  => 775,
   }
 }
