@@ -52,3 +52,4 @@ class {'update_aptget':
 }
 
 class{"tokumx": }
+class{"golang": }
