@@ -19,8 +19,10 @@
     # ssh into your VM
     $ vagrant ssh
     
-<iframe border='0' height='502' id='shelr_record_51db32739660807d76000032' scrolling='no' src='http://shelr.tv/records/51db32739660807d76000032/embed' style='border: 0' width='906'></iframe>
-<iframe width="560" height="315" src="http://www.youtube.com/embed/EKoxLxzWNOk" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+See a screencast here:
+
+  [Playing with TokuMX](http://mindreframer.github.io/posts/2013/07-08-play-with-tokumx-now.html)
+    
 
 
 #### runpuppet (run  puppet), run under `vagrant`-user:
