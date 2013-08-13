@@ -41,4 +41,4 @@ See a screencast here:
 
     http://www.tokutek.com/products/downloads/tokumx-ce-downloads/
 
-  The Puppet module  works with `tokumx-1.0.2-linux-x86_64`.
+  The Puppet module  works with `tokumx-1.0.3-linux-x86_64`.
