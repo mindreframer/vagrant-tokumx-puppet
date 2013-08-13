@@ -1,5 +1,5 @@
 class tokumx::params{
-  $fullpath      = "tokumx-1.0.2-linux-x86_64"
+  $fullpath      = "tokumx-1.0.3-linux-x86_64"
   $download_file = "$fullpath.tgz"
   $packagenames  = [] #["libaio1", "mysql-client-core-5.5"] # ubuntu 12.04
   # a tmp location
