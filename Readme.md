@@ -18,11 +18,19 @@
 
     # ssh into your VM
     $ vagrant ssh
-    
+
+### On fresh Ubuntu 12.04:
+
+    $ apt-get install puppet
+    $ cd /tmp
+    $ git clone git://github.com/mindreframer/vagrant-tokumx-puppet.git
+    $ puppet apply -vv  --modulepath=/tmp/vagrant-tokumx-puppet/puppet/modules/ /tmp/vagrant-tokumx-puppet/puppet/manifests/base.pp
+
+
 See a screencast here:
 
   [Playing with TokuMX](http://mindreframer.github.io/posts/2013/07-08-play-with-tokumx-now.html)
-    
+
 
 
 #### runpuppet (run  puppet), run under `vagrant`-user:
